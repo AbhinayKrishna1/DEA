@@ -1,0 +1,515 @@
+#1
+a=input().split()
+b=[]
+for i in a:
+    x="".join(sorted(i))
+    d=[]
+    for j in a:
+        
+        y="".join(sorted(j))
+        if x==y:
+            d.append([j])
+    if d not in b:
+        b.append(d)
+print(b)
+-----------------------------------
+#4
+
+n=int(input("n value: "))
+l=[]
+for i in range(n):
+    ll=list(map(int,input().split()))[:n]
+    l.append(ll)
+    r=0
+j=0
+for i in range(n-1,-1,-1):
+
+    print(l[j][i])
+    r=r+l[j][i]
+    j=j+1
+rr=0
+j=0
+for i in range(0,n):
+    print(l[i][j])
+    r=r+l[i][j]
+    j=j+1
+if n%2!=0:
+    k=n//2
+    k=l[k][k]
+else:
+    k=0
+print(r+rr-k)
+--------------------------------------
+
+#3
+s=input()
+l=[]
+for i in range(len(s)):
+    for j in range(len(s)):
+        k=s[i:j]
+        if k!="":
+            l.append(k)
+ll=[]
+for i in l:
+    for j in i:
+        if i.count(j)==1:
+            k=True
+        else:
+            k=False
+            break
+    print(i)
+----------------------------------------
+
+# In this Python challenge, you need to write a function that accepts an encoded string as a parameter. This string will contain a first name, last name, and an id.
+# Values in the string can be separated by any number of zeros. The id is a numeric value but will contain no zeros. The function should parse the string and return a Python dictionary that contains the first name, last name, and id values.
+# An example input would be “Robert000Smith000123”. The function should return the following using that input:
+# { “first_name”: “Robert”, “last_name”: “Smith”, “id”: “123” }
+
+'''import re
+
+def c(n):
+    d={}
+    for i in n:
+        k=re.split(r'0+',n)
+        d['fn']=k[0]
+        d['ln']=k[1]
+        d['id']=k[2]
+    print(d)
+c("Robert000Smith000123")'''
+
+#--------------------------------------------
+
+# Write a function in Python that accepts two string parameters. The first parameter will be a string of characters, and the second parameter will be the same string
+# of characters, but they’ll be in a different order and have one extra character. The function should return that extra character.
+# For example, if the first parameter is “eueiieo” and the second is “iieoedue,” then the function should return “d.”
+
+'''def f(a,b):
+    a1=set(a)
+    b1=set(b)
+    cc=b1.symmetric_difference(a1)
+    print(cc)
+f('eueiieo','iieoedue')'''
+
+#--------------------------------------------
+
+# Create a function in Python that accepts one parameter: a string that’s a sentence.
+# This function should return True if any word in that sentence contains duplicate letters and False if not.
+# For this challenge, you need to write a function in Python that accepts a string of ASCII characters.
+# It should return each character’s value as a hexadecimal string. Separate each byte by a space, and return all alpha hexadecimal characters as lowercase.
+
+'''def r(n):
+    k=set()
+    l=False
+    for i in n:
+        if i in k:
+            l= True
+            break
+        k.add(i)
+    if l is True:
+        return ' '.join(format(ord(j), '02x') for j in n)
+    else:
+        return False
+
+print(r("Hello"))'''
+
+#--------------------------------------------
+
+# For the purpose of this challenge, shadow sentences are sentences where every word is the same length and order but without any of the same letters.
+# Write a function that accepts two parameters that may or may not be shadows of each other. The function should return True if they are and False if they aren’t.
+# An example would be “they are round” and “fold two times,” which are shadow sentences, while “his friends” and “our company” are not because both contain an r.
+
+'''def shadow(sense1,sense2):
+    words1=sense1.split()
+    words2=sense2.split()
+    if len(words1)!=len(words2):
+        return False
+    for w1,w2 in zip(words1,words2):
+        if len(w1)!=len(w2):
+            return False
+        if set(w1)&set(w2):
+            return False
+    return True
+print(shadow("his friends","our company"))'''
+
+#--------------------------------------------
+
+# In this Python challenge, write a function that’ll accept two numbers. These numbers will represent a position on a tic-tac-toe board. They can be 0 through 8, 
+# where 0 is the top-left spot, and 8 is the bottom-right spot.
+# These parameters are two marks on the tic-tac-toe board. The function should return the number of the spot that can block these two spots from winning the game.
+
+'''def find_blocking_move(pos1, pos2):
+    winning_combinations = [
+        {0, 1, 2}, {3, 4, 5}, {6, 7, 8},  # rows
+        {0, 3, 6}, {1, 4, 7}, {2, 5, 8},  # columns
+        {0, 4, 8}, {2, 4, 6}              # diagonals
+    ]
+
+    player_positions = {pos1, pos2}
+
+    for combo in winning_combinations:
+        if player_positions.issubset(combo):
+            # Return the missing position
+            missing = combo - player_positions
+            return missing.pop()
+
+    return None  # No winning line can be blocked
+
+print(find_blocking_move(0, 1))  # ➤ 2 (block row)
+print(find_blocking_move(4, 8))  # ➤ 0 (block diagonal)
+print(find_blocking_move(2, 6))  # ➤ None (not in same line)'''
+
+#--------------------------------------------
+
+# Create a function in Python that accepts two parameters. They’ll both be numbers.
+# The first will be the month as a number, and the second will be the four-digit year.
+# The function should parse the parameters and return True if the month contains a Friday the 13th and False if it doesn’t.
+
+'''import datetime
+
+def has_friday_13th(month, year):
+    try:
+        day = datetime.date(year, month, 13)
+        return day.weekday() == 4  # 4 means Friday
+    except ValueError:
+        return False  # Handles invalid inputs like month=13'''
+
+#--------------------------------------------
+
+#Custom Class Exception
+'''class AgeError(Exception):
+    pass
+
+def checkage(age):
+    if age>18:
+        print("Eligible")
+    else:
+        raise AgeError("age is too small")
+
+try:
+    checkage(17)
+except AgeError as e:
+    print(e)'''
+
+'''
+s="hello"
+print(s[2])/print(s[-2])'''
+
+#--------------------------------------------
+
+'''You are given a string S and width W. Your task is to wrap the string into a paragraph of width.
+If the following string is given as input to the program:
+
+
+ABCDEFGHIJKLIMNOQRSTUVWXYZ
+4
+ 
+Then, the output of the program should be:
+
+
+ABCD
+EFGH
+IJKL
+IMNO
+QRST
+UVWX
+YZ
+
+def s(s,w):
+    for i in range(0,len(s),w):
+        print(s[i:i+w])
+
+s("ABCDEFGHIJKLIMNOQRSTUVWXYZ",4)'''
+
+#--------------------------------------------
+
+'''
+import datetime
+month, day, year = map(int, input().split())
+date = datetime.date(year, month, day)
+print(date.strftime("%A").upper())'''
+
+#--------------------------------------------
+
+'''
+def print_rangoli(n):
+    import string
+    alpha = string.ascii_lowercase
+
+    lines = []
+
+    for i in range(n):
+        # Get left side (in reverse)
+        left = alpha[n-1:i:-1]
+        # Get center and right side
+        center = alpha[i:n]
+        # Join with hyphens
+        line = '-'.join(left + center)
+        # Center-align with width
+        lines.append(line.center(4*n - 3, '-'))
+
+    # Mirror the upper half and print
+    full = lines[::-1] + lines[1:]
+    for line in full:
+        print(line)
+'''
+#--------------------------------------------
+
+"""m = int(input())
+set_m = set(map(int, input().split()))
+n = int(input())
+set_n = set(map(int, input().split()))
+result = sorted(set_m ^ set_n)
+for num in result:
+    print(num)"""
+
+#--------------------------------------------
+
+"""
+text = input()
+reversed_text = text[::-1]
+print(reversed_text)
+"""
+
+#--------------------------------------------
+
+"""k=input("")
+n=""
+for i in range(len(k)):
+    n+=k[i]+str(i+1)
+print(n)"""
+
+#--------------------------------------------
+
+# Total heads and legs
+'''total_heads = 35
+total_legs = 94
+
+# Try all possible values
+for rabbits in range(total_heads + 1):
+    chickens = total_heads - rabbits
+    if 2 * chickens + 4 * rabbits == total_legs:
+        print("Chickens:", chickens)
+        print("Rabbits:", rabbits)
+        break'''
+
+'''l1=[1,3,6,78,35,55]
+l2=[12,24,35,24,88,120,155]
+s1=set(l1)
+s2=set(l2)
+print(s1)
+print(s2)
+s1&=s2
+r=list(s1)
+print(r)'''
+
+#--------------------------------------------
+
+'''class person():
+    def getgender(self):
+        return "Nothing"
+
+class Male(person):
+    def getgender(self):
+        return "Male"
+
+class Female(person):
+    def getgender(self):
+        return "Female"
+
+m=Male()
+f=Female()
+
+print(m.getgender())
+print(f.getgender())'''
+
+
+SELECT c.customer_id, c.customer_name, SUM(o.total_amount) AS total_spent
+FROM Customers c
+JOIN Orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.customer_name
+ORDER BY total_spent DESC
+LIMIT 5;
+-----------------------------------
+SELECT e.employee_id, e.employee_name, COUNT(o.order_id) AS orders_handled
+FROM Employees e
+JOIN Orders o ON e.employee_id = o.employee_id
+GROUP BY e.employee_id, e.employee_name
+ORDER BY orders_handled DESC;
+----------------------------------------
+SELECT c.category_name, p.product_name, SUM(od.quantity * od.unit_price) AS revenue
+FROM OrderDetails od
+JOIN Products p ON od.product_id = p.product_id
+JOIN Categories c ON p.category_id = c.category_id
+GROUP BY c.category_name, p.product_id, p.product_name
+HAVING SUM(od.quantity * od.unit_price) = (
+    SELECT MAX(total_revenue)
+    FROM (
+        SELECT p2.category_id, p2.product_id, SUM(od2.quantity * od2.unit_price) AS total_revenue
+        FROM OrderDetails od2
+        JOIN Products p2 ON od2.product_id = p2.product_id
+        GROUP BY p2.category_id, p2.product_id
+        HAVING p2.category_id = c.category_id
+    ) sub
+)
+
+----------------------------------------------
+SELECT s.shipper_id, s.shipper_name, AVG(DATEDIFF(o.shipped_date, o.order_date)) AS avg_delivery_days
+FROM Orders o
+JOIN Shippers s ON o.shipper_id = s.shipper_id
+WHERE o.shipped_date IS NOT NULL AND o.order_date IS NOT NULL
+GROUP BY s.shipper_id, s.shipper_name;
+-----------------------------------------------
+
+SELECT w1.Id
+FROM Weather w1
+JOIN Weather w2 ON DATEDIFF(w1.RecordDate, w2.RecordDate) = 1
+WHERE w1.Temperature > w2.Temperature;
+----------------------------------------------
+SELECT player_id, MIN(event_date) AS first_login
+FROM Activity
+GROUP BY player_id;
+---------------------------------------------
+SELECT MAX(Salary) AS SecondHighestSalary
+FROM Employee
+WHERE Salary < (SELECT MAX(Salary) FROM Employee);
+--------------------------------------------
+SELECT name
+FROM Users u
+JOIN (SELECT user_id, COUNT(*) AS rating_count FROM MovieRating GROUP BY user_id ORDER BY rating_count DESC, user_id ASC LIMIT 1) r
+ON u.user_id = r.user_id;
+---------------------------------------------
+SELECT title
+FROM Movies m
+JOIN (SELECT movie_id, AVG(rating) AS avg_rating FROM MovieRating WHERE created_at BETWEEN '2020-02-01' AND '2020-02-29' GROUP BY movie_id ORDER BY avg_rating DESC, movie_id ASC LIMIT 1) t
+ON m.movie_id = t.movie_id;
+-------------------------------------------
+SELECT e.name
+FROM Employee e
+JOIN Employee m ON e.managerId = m.id
+WHERE e.salary > m.salary;
+-----------------------------------------
+DELETE e1 FROM Person e1
+JOIN Person e2
+ON e1.email = e2.email AND e1.id > e2.id;
+
+--------------------------------------------
+SELECT id, visit_date, people
+FROM (
+  SELECT id, visit_date, people,
+         LEAD(people, 1) OVER (ORDER BY visit_date) AS p1,
+         LAG(people, 1) OVER (ORDER BY visit_date) AS p2
+  FROM Stadium
+) s
+WHERE (people >= 100 AND p1 >= 100 AND p2 >= 100)
+   OR (people >= 100 AND p1 >= 100)
+   OR (people >= 100 AND p2 >= 100);
+--------------------------------------------
+SELECT customer_id
+FROM Customer
+GROUP BY customer_id
+HAVING COUNT(DISTINCT product_key) = (SELECT COUNT(*) FROM Product);
+------------------------------------------------------
+str="abcdefghijklmnopqrstuvwxyz"
+l=4
+for i in range(0,len(str),l):
+    print(str[i:i+l])
+=========================
+def print_pattern(size):
+    width = size * 4 - 3  # Total width of the pattern
+    center_index = width // 2
+
+    # Function to generate a line
+    def generate_line(n):
+        letters = [chr(ord('a') + i) for i in range(size - 1, size - 1 - n, -1)]
+        mid = letters + letters[-2::-1]  # Mirror the sequence excluding the last
+        return '-'.join(mid).center(width, '-')
+
+    # Top half
+    for i in range(1, size):
+        print(generate_line(i))
+
+    # Center line
+    letters = [chr(ord('a') + i) for i in range(size - 1, -1, -1)]
+    full = letters + letters[1:]
+    print('-'.join(full).center(width, '-'))
+
+    # Bottom half
+    for i in range(size - 1, 0, -1):
+        print(generate_line(i))
+
+# Example Usage
+print("Size 3 pattern:\n")
+print_pattern(3)
+
+print("\nSize 5 pattern:\n")
+print_pattern(5)
+---------------------------------------
+from datetime import datetime
+
+d = "08 05 2015"
+dt = datetime.strptime(d, "%d %m %Y")
+print(dt.strftime("%A"))
+------------------------------------------
+n=int(input())
+l1=set(map(int,input().split(" ")))
+m=int(input())
+l2=set(map(int,input().split(" ")))
+res=l1^l2
+print(res)
+------------------------------------
+str="rise to vote sir"
+new=""
+for i in str[::-1]:
+    new+=i
+print(new)
+------------------------------------
+a='H1e2l3l4o5w6o7r8l9d'
+res=''
+for i in a:
+    if not i.isdigit():
+        res+=i
+print(res)
+-----------------------------------
+heads=35
+legs=94
+for r in range(heads+1):
+    c=heads-r
+    if 2*c+4*r==legs:
+        print(c,r)
+        break
+else:
+    print(None)
+----------------------------
+a=[1,3,6,78,35,55]
+b=[12,24,35,24,88,120,155]
+res=set(a)& set(b)
+print(res)
+------------------------
+class person:
+    pass
+class male(person):
+    def getGender(self):
+        print("Male")
+class Female(person):
+    def getGender(self):
+        print("female")
+p=male()
+p2=Female()
+p.getGender()
+p2.getGender()
+--------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
